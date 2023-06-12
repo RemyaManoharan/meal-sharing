@@ -29,7 +29,11 @@ app.get("/future-meals", async (req, res) => {
       .select()
       .from("meal")
       .where("when", ">", knex.fn.now());
-    res.status(200).json(meals);
+    res.status(200).json(meals[0]);
+    if (!meals) {
+      // If no meal is found, return a 404 status code
+      return res.status(404).json({ error: "No meal found" });
+    }
   } catch (error) {
     res.status(500).json("500. Internal Server Error");
   }
@@ -42,7 +46,11 @@ app.get("/past-meals", async (req, res) => {
       .from("meal")
       .where("when", "<", knex.fn.now())
       .orderBy("id");
-    res.status(200).json(meals);
+    res.status(200).json(meals[0]);
+    if (!meals) {
+      // If no meal is found, return a 404 status code
+      return res.status(404).json({ error: "No meal found" });
+    }
   } catch (error) {
     res.status(500).json("500. Internal Server Error");
   }
