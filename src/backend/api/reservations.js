@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const knex = require("../database");
+const { validateMeal, validateReservation } = require("./validation");
 
 // /api/reservations	GET	Returns all reservations
 router.get("/", async (req, res) => {
@@ -17,6 +18,10 @@ router.get("/", async (req, res) => {
 
 // /api/reservations	POST	Adds a new reservation to the database
 router.post("/", async (req, res) => {
+  const { error, value } = validateReservation(req.body);
+  if (error) {
+    return res.status(400).json({ error: error.details[0].message });
+  }
   const {
     number_of_guests,
     meal_id,
@@ -63,6 +68,11 @@ router.put("/:id", async (req, res) => {
     contact_name,
     contact_email,
   } = req.body;
+  const { error, value } = validateReservation(req.body);
+  // Check for validation errors
+  if (error) {
+    return res.status(400).json({ error: error.details[0].message });
+  }
   try {
     const reservationExists = await knex("reservation")
       .where("id", reservationId)
