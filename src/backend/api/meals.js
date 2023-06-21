@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const knex = require("../database");
+const { validateMeal, validateReservation } = require("./validation");
 
 router.get("/", async (request, response) => {
   try {
@@ -16,6 +17,10 @@ router.get("/", async (request, response) => {
 
 // HW part first qstn : /api/meals post adda new meal to the database
 router.post("/", async (request, response) => {
+  const { error, value } = validateMeal(request.body);
+  if (error) {
+    return response.status(400).json({ error: error.details[0].message });
+  }
   try {
     const { title, description, location, when, max_reservations, price } =
       request.body;
@@ -55,6 +60,10 @@ router.put("/:id", async (req, res) => {
   const mealId = req.params.id;
   const { title, description, location, when, max_reservations, price } =
     req.body;
+  const { error, value } = validateMeal(req.body);
+  if (error) {
+    return res.status(400).json({ error: error.details[0].message });
+  }
 
   try {
     // Update the meal in the database using Knex
