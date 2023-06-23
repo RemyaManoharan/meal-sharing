@@ -8,6 +8,7 @@ const buildPath = path.join(__dirname, "../../dist");
 const port = process.env.PORT || 3000;
 const cors = require("cors");
 const reservationRouter = require("./api/reservations");
+const reviewRouter = require("./api/reviews");
 
 const knex = require("./database");
 
@@ -24,6 +25,7 @@ app.use(cors());
 
 router.use("/meals", mealsRouter);
 router.use("/reservations", reservationRouter);
+router.use("/reviews", reviewRouter);
 // Route to get future meals sorted by ID
 app.get("/future-meals", async (req, res) => {
   try {
