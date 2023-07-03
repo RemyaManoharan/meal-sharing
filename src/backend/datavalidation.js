@@ -26,7 +26,18 @@ const validateReservation = (reservation) => {
   return schema.validate(reservation);
 };
 
+const validateReview = (review) => {
+  const schema = Joi.object({
+    title: Joi.string().required(),
+    description: Joi.string().required(),
+    meal_id: Joi.number().required(),
+    stars: Joi.number().required(),
+    created_date: Joi.date().iso().required(),
+  });
+  return schema.validate(review);
+};
 module.exports = {
   validateMeal,
   validateReservation,
+  validateReview,
 };
