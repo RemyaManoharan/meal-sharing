@@ -63,13 +63,17 @@ function ReservationForm({ id }) {
       created_date: new Date().toLocaleDateString("en-CA"),
     }));
   }
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   return (
     <form className="form-group" onSubmit={handleSubmit}>
-        <h5>Enter the fields to complete reservation!</h5>
+      <h5>Enter the fields to complete reservation!</h5>
       <div className="input-group">
         <label>No.of guests</label>
         <input
+          className="input-style"
           type="number"
           name="number_of_guests"
           value={reservation.number_of_guests}
@@ -79,6 +83,7 @@ function ReservationForm({ id }) {
       <div className="input-group">
         <label>Name</label>
         <input
+          className="input-style"
           type="text"
           name="contact_name"
           value={reservation.contact_name}
@@ -89,6 +94,7 @@ function ReservationForm({ id }) {
       <div className="input-group">
         <label>Email</label>
         <input
+          className="input-style"
           type="email"
           name="contact_email"
           value={reservation.contact_email}
@@ -99,6 +105,7 @@ function ReservationForm({ id }) {
       <div className="input-group">
         <label>Phone</label>
         <input
+          className="input-style"
           type="tel"
           name="contact_phonenumber"
           value={reservation.contact_phonenumber}
@@ -107,9 +114,11 @@ function ReservationForm({ id }) {
         />
       </div>
       <div>
-        <button className="button-group" type="submit">Submit</button>
+        <button className="btn" type="submit">
+          Submit
+        </button>
       </div>
-      <Modal isOpen={isOpen} />
+      <Modal isOpen={isOpen} closeModal={closeModal} />
     </form>
   );
 }

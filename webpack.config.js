@@ -26,11 +26,23 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        test: /\.(woff|woff2|eot|ttf|svg)$/,
         use: {
           loader: "url-loader",
           options: { limit: 100000 },
         },
+      },
+      {
+        test: /\.(png|jpeg|jpg|gif)$/i,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              outputPath: "images", // Specifies the output path for images
+            },
+          },
+        ],
       },
     ],
   },

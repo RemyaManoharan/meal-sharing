@@ -13,6 +13,8 @@ import {
 } from "react-router-dom";
 import Reservation from "./pages/Reservation/ReservationPage";
 import { MealsProvider } from "./context/MealsContext";
+import ReviewPage from "./pages/ReviewPage/ReviewPage";
+
 
 const routes = [
   {
@@ -30,6 +32,11 @@ const routes = [
         path: "/meals/:mealId",
         element: <Reservation />,
       },
+      {
+        path: "/reviews",
+        element: <ReviewPage />,
+      },
+     
     ],
   },
 ];

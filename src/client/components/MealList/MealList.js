@@ -5,17 +5,24 @@ import { MealsContext } from "../../context/MealsContext";
 
 import "./mealListStyle.css";
 
-export default function MealList({ limit }) {
+export default function MealList({ newMeals, limit, query }) {
   const meals = useContext(MealsContext);
-  const limitedMeals = meals.slice(0, limit);
+
+  const availableMeals = newMeals || meals;
+  const limitedMeals = availableMeals.slice(0, limit);
+
+  const filteredMeals = limitedMeals.filter((meal) => {
+    if (!query?.title || !meal.title) {
+      return true; // Show all meals when no title query or meal title is provided
+    }
+
+    return meal.title.toLowerCase().includes(query.title.toLowerCase());
+  });
 
   return (
-    <section>
-      <p>Featured Meals
-        
-      </p>
+    <section className="meal-list">
       <div className="meal-card">
-        {limitedMeals.map((meal) => {
+        {filteredMeals.map((meal) => {
           return <Meal key={meal.id} meal={meal} />;
         })}
       </div>

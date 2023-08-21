@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { CgMenuCheese } from "react-icons/cg";
 import { Link } from "react-router-dom";
+import logoImage from "../../assets/images/logo.png";
+
 
 import "./NavBar.css";
 
@@ -17,8 +19,10 @@ function NavBar() {
   return (
     <header className="navbar">
       {/* logo */}
+
       <Link to="/">
-        <span>
+        <span className="logo-container">
+          <img className="logo" src={logoImage} alt="Logo" />
           <h1>MEAL SHARING APP</h1>
         </span>
       </Link>

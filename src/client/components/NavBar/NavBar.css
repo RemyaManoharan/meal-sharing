@@ -9,11 +9,14 @@
   justify-content: space-between;
   align-items: center;
 }
-
-.logo {
+.logo-container {
   display: flex;
-  font-family: var(--font-logo);
-  font-style: italic;
+  gap: 10px;
+  align-items: center;
+}
+.logo {
+  width: 60px;
+  height: 60px;
 }
 
 .btnMenu {
@@ -34,7 +37,7 @@
 }
 
 .navigation a:hover {
-  color: var(--color-accents);
+  color: #106535;
 }
 .navigation a:active {
   color: black;
