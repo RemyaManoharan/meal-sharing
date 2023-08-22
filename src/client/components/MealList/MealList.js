@@ -1,41 +1,31 @@
-/* eslint-disable camelcase */
-/* eslint-disable @typescript-eslint/camelcase */
-import React from "react";
-// import PropTypes from "prop-types";
+import React, { useState, useEffect, useContext } from "react";
+import MealItem from "./MealItem";
+import Meal from "../Meal/Meal";
+import { MealsContext } from "../../context/MealsContext";
+
 import "./mealListStyle.css";
 
-import { useState, useEffect } from "react";
-import MealItem from "./MealItem";
+export default function MealList({ newMeals, limit, query }) {
+  const meals = useContext(MealsContext);
 
-export default function MealList() {
-  const fetch_url = "http://localhost:5000/api/meals";
+  const availableMeals = newMeals || meals;
+  const limitedMeals = availableMeals.slice(0, limit);
 
-  const [meals, setMeals] = useState([]);
-
-  useEffect(() => {
-    getMeals();
-  }, []);
-
-  console.log(meals);
-
-  const getMeals = async () => {
-    try {
-      const response = await fetch(fetch_url);
-      const data = await response.json();
-      setMeals((prev) => [...prev, ...data]);
-    } catch (error) {
-      console.log(error);
+  const filteredMeals = limitedMeals.filter((meal) => {
+    if (!query?.title || !meal.title) {
+      return true; // Show all meals when no title query or meal title is provided
     }
-  };
 
-  const displayMeals = meals.map((meal) => {
-    return <MealItem key={meal.id} meal={meal} />;
+    return meal.title.toLowerCase().includes(query.title.toLowerCase());
   });
 
   return (
     <section className="meal-list">
-      <p>Meal list</p>
-      <ul>{displayMeals}</ul>
+      <div className="meal-card">
+        {filteredMeals.map((meal) => {
+          return <Meal key={meal.id} meal={meal} />;
+        })}
+      </div>
     </section>
   );
 }

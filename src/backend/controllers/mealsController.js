@@ -126,7 +126,7 @@ const getMealsByQuery = async (req, res) => {
       query = query.groupBy("meal_id");
     }
     if (title) {
-      query = query.where("title", "like", "%${title}");
+      query = query.where("title", "like", `%${title}%`);
     }
     if (dateAfter) {
       query = query.where("when", ">", dateAfter);
