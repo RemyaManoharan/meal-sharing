@@ -2,13 +2,16 @@ import React from "react";
 import NavBar from "../components/NavBar/NavBar";
 import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer/Footer";
+import "./Layout.css";
 
 function Layout() {
   return (
-    <div>
+    <div className="layout-container">
       <NavBar />
-      <Outlet />
-      <Footer/>
+      <div className="content-container">
+        <Outlet />
+      </div>
+      <Footer />
     </div>
   );
 }

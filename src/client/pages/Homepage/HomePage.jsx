@@ -36,7 +36,7 @@ function HomePage() {
           <MealList limit={4} />
         </section>
         <Link to="/meals">
-          <button className="btn">take to meals</button>
+          <button className="btn">All meals</button>
         </Link>
       </div>
     </div>
