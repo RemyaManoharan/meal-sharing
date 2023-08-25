@@ -5,10 +5,8 @@ export const MealsContext = createContext();
 
 export const MealsProvider = ({ children, limit }) => {
   const fetch_url = "http://localhost:5000/api/meals";
-
   const [meals, setMeals] = useState([]);
 
-  console.log(meals);
 
   const getMeals = async () => {
     try {

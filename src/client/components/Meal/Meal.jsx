@@ -4,7 +4,7 @@ import "./Meal.css";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import Star from "../Star/Star";
 
-function Meal({ meal }) {
+function Meal({ meal ,availableSpots}) {
   const { id, title, description, price, max_reservations } = meal;
   const reviews = meal.reviews || [];
 
@@ -31,6 +31,7 @@ function Meal({ meal }) {
         <h4>{meal.title}</h4>
       </Link>
       <p>{meal.description}</p>
+      <p>Remaining Spots: {availableSpots}</p>
       <div className="star-container">{starRating}</div>
       <p>{meal.price}£</p>
     </div>

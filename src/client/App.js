@@ -1,5 +1,4 @@
 import React from "react";
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import TestComponent from "./components/TestComponent/TestComponent";
 import MealList from "./components/MealList/MealList";
 import NavBar from "./components/NavBar/NavBar";
@@ -14,7 +13,7 @@ import {
 import Reservation from "./pages/Reservation/ReservationPage";
 import { MealsProvider } from "./context/MealsContext";
 import ReviewPage from "./pages/ReviewPage/ReviewPage";
-
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 const routes = [
   {
@@ -36,7 +35,10 @@ const routes = [
         path: "/reviews",
         element: <ReviewPage />,
       },
-     
+      {
+        path: "/*",
+        element: <NotFoundPage />,
+      },
     ],
   },
 ];
